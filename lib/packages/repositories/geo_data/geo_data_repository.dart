@@ -15,7 +15,6 @@ class GeoDataRepository {
   Future<Map<String, dynamic>> fetchCities({
     int limit = 10,
     int offset = 0,
-    required String countryCode,
     String? search,
   }) async {
     final result = await _geoGetList<Map<String, dynamic>>(
@@ -24,27 +23,27 @@ class GeoDataRepository {
         'namePrefix': search,
         'limit': limit,
         'offset': offset,
-        'countryIds': countryCode
+        // 'countryIds': countryCode
       },
     );
     return result.data!;
   }
 
-  Future<Map<String, dynamic>> fetchCountries({
-    int limit = 10,
-    int offset = 0,
-    String? search,
-  }) async {
-    final result = await _geoGetList<Map<String, dynamic>>(
-      'countries',
-      query: <String, dynamic>{
-        'namePrefix': search,
-        'limit': limit,
-        'offset': offset,
-      },
-    );
-    return result.data!;
-  }
+  // Future<Map<String, dynamic>> fetchCountries({
+  //   int limit = 10,
+  //   int offset = 0,
+  //   String? search,
+  // }) async {
+  //   final result = await _geoGetList<Map<String, dynamic>>(
+  //     'countries',
+  //     query: <String, dynamic>{
+  //       'namePrefix': search,
+  //       'limit': limit,
+  //       'offset': offset,
+  //     },
+  //   );
+  //   return result.data!;
+  // }
 
   Future<Response<T>> _geoGetList<T>(
     String endpoint, {
